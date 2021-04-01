@@ -1,6 +1,11 @@
 const express = require('express')
 const path = require('path')
+const ejs = require('ejs')
 const app = new express()
+
+// Tell Express tu use EJS as template engine
+app.set('view engine', 'ejs')
+// Tell Express to use the public folder
 app.use(express.static('public'))
 
 app.listen(3030, () => {
@@ -8,27 +13,27 @@ app.listen(3030, () => {
 
     app.get('/', (req, res) => {
 
-        res.sendFile(path.resolve(__dirname, 'pages/index.html'))
+        res.render('index')
     })
 
     app.get('/about', (req, res) => {
 
-        res.sendFile(path.resolve(__dirname, 'pages/about.html'))
+        res.render('about')
     })
 
     app.get('/post', (req, res) => {
 
-        res.sendFile(path.resolve(__dirname, 'pages/post.html'))
+        res.render('post')
     })
 
     app.get('/contact', (req, res) => {
 
-        res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
+        res.render('contact')
     })
 
     // 404 Page not Found
     app.get('*', (req, res) => {
 
-        res.sendFile(path.resolve(__dirname, 'pages/index.html'))
+        res.render('index')
     })
 })
